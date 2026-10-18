@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <h1>Welcome</h1>
+  <p class="subtitle">Choose how you'd like to sign in</p>
+
+  <div class="container">
+    <!-- Volunteer sign-in -->
+    <div class="card volunteer">
+      <h2>Volunteer Sign In</h2>
+      <p>Sign in to see opportunities and help others.</p>
+      <form id="volunteerForm" data-role="volunteer">
+        <label for="volunteerEmail">Email</label>
+        <input type="email" id="volunteerEmail" name="email" placeholder="you@example.com" required />
+
+        <label for="volunteerPassword">Password</label>
+        <input type="password" id="volunteerPassword" name="password" placeholder="••••••••" required />
+
+        <button type="submit">Sign In as Volunteer</button>
+        <div class="links">
+          <a href="#">Forgot password?</a>
+          <a href="#" data-opens="volunteerSignup">Become a volunteer</a>
+        </div>
+        <div class="message"></div>
+      </form>
+    </div>
+
+    <!-- Organization sign-in -->
+    <div class="card organization">
+      <h2>Organization Sign In</h2>
+      <p>Sign in to post opportunities and manage volunteers.</p>
+      <form id="organizationForm" data-role="organization">
+        <label for="organizationEmail">Email</label>
+        <input type="email" id="organizationEmail" name="email" placeholder="you@example.org" required />
+
+        <label for="organizationPassword">Password</label>
+        <input type="password" id="organizationPassword" name="password" placeholder="••••••••" required />
+
+        <button type="submit">Sign In as Organization</button>
+        <div class="links">
+          <a href="#">Forgot password?</a>
+          <a href="#" data-opens="organizationSignup">Register your organization</a>
+        </div>
+        <div class="message"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Volunteer sign-up popup -->
+  <dialog id="volunteerSignup" class="modal volunteer">
+    <button type="button" class="close" aria-label="Close">&times;</button>
+    <h2>Become a Volunteer</h2>
+    <p>Create an account to find opportunities and help others.</p>
+    <form data-role="volunteer">
+      <label for="volName">Full name</label>
+      <input type="text" id="volName" name="name" required />
+
+      <label for="volSignupEmail">Email</label>
+      <input type="email" id="volSignupEmail" name="email" placeholder="you@example.com" required />
+
+      <label for="volSignupEmailVerify">Verify Email</label>
+      <input type="email" id="volSignupEmailVerify" name="emailVerify" placeholder="Re-enter your Email" required />
+
+      <label for="volSignupPassword">Password</label>
+      <input type="password" id="volSignupPassword" name="password" minlength="8" required />
+
+      <label for="volSignupPassowrdVerify">Verify Password</label>
+      <input type="password" id="volSignupPassowrdVerify" name="passwordVerify" placeholder="Re-enter your Password" required />
+      <button type="submit">Create Volunteer Account</button>
+      <div class="message"></div>
+    </form>
+  </dialog>
+
+  <!-- Organization sign-up popup -->
+  <dialog id="organizationSignup" class="modal organization">
+    <button type="button" class="close" aria-label="Close">&times;</button>
+    <h2>Register Your Organization</h2>
+    <p>Create an account to post opportunities and manage volunteers.</p>
+    <form data-role="organization">
+      <label for="orgName">Organization name</label>
+      <input type="text" id="orgName" name="orgName" required />
+
+      <label for="orgContact">Contact person name</label>
+      <input type="text" id="orgContact" name="contactName" required />
+
+      <label for="orgSignupEmail">Email</label>
+      <input type="email" id="orgSignupEmail" name="email" placeholder="you@example.org" required />
+
+      <label for="orgSignupEmailVerify">Verify Email</label>
+      <input type="email" id="orgSignupEmailVerify" name="emailVerify" placeholder="Re-enter your Email" required />
+
+      <label for="orgSignupPassword">Password</label>
+      <input type="password" id="orgSignupPassword" name="password" minlength="8" required />
+
+      <label for="orgSignupPasswordVerify">Verify Password</label>
+      <input type="password" id="orgSignupPasswordVerify" name="passwordVerify" placeholder="Re-enter your Password" required />
+
+
+      <button type="submit">Register Organization</button>
+      <div class="message"></div>
+    </form>
+  </dialog>
+
+  <script src="{{ url_for('static', filename='signInPage.js') }}"></script>
+</body>
+</html>

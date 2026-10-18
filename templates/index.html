@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lend a Hand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="home">
+  <header class="banner">
+    <h1><span class="logo" aria-hidden="true">🤝</span> Lend A Hand</h1>
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('sign_in') }}">Sign In</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <h2>Find volunteer work you're a <span class="highlight">great match</span> for!</h2>
+    <p>Tell us where you are, when you're free, and what you're good at. We'll find shifts that fit.</p>
+  </section>
+
+  <main>
+    <form id="shiftSearch" class="search" method="post" action="{{ url_for('match') }}">
+      <div class="field">
+        <label for="zip">ZIP code</label>
+        <input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}"
+               maxlength="5" placeholder="98105" required />
+      </div>
+
+      <div class="field">
+        <label for="distance">Search distance</label>
+        <select id="distance" name="distance">
+          <option value="5">5 miles</option>
+          <option value="10" selected>10 miles</option>
+          <option value="25">25 miles</option>
+          <option value="50">50 miles</option>
+        </select>
+      </div>
+
+      <div class="field availability">
+        <label>When are you free?</label>
+        <div class="days">
+          <label class="day"><input type="checkbox" name="day" value="sun" /><span>Sun</span></label>
+          <label class="day"><input type="checkbox" name="day" value="mon" /><span>Mon</span></label>
+          <label class="day"><input type="checkbox" name="day" value="tue" /><span>Tue</span></label>
+          <label class="day"><input type="checkbox" name="day" value="wed" /><span>Wed</span></label>
+          <label class="day"><input type="checkbox" name="day" value="thu" /><span>Thu</span></label>
+          <label class="day"><input type="checkbox" name="day" value="fri" /><span>Fri</span></label>
+          <label class="day"><input type="checkbox" name="day" value="sat" /><span>Sat</span></label>
+        </div>
+        <!-- index.js adds a time range here for each day picked above -->
+        <div class="slots">
+          <p class="hint">Tap the days you're free, then set your hours.</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="skills">Skills and interests</label>
+        <textarea id="skills" name="skills" rows="6"
+                  placeholder="e.g. Spanish, lifting, working with kids"></textarea>
+      </div>
+
+      <button type="submit">Find Shift</button>
+    </form>
+    <p class="message"></p>
+  </main>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>

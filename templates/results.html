@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Matches · Lend a Hand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="home">
+  <header class="banner">
+    <h1><span class="logo" aria-hidden="true">🤝</span> Lend A Hand</h1>
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('sign_in') }}">Sign In</a>
+    </nav>
+  </header>
+
+  <main class="results">
+    <p class="summary">
+      Shifts within {{ search.distance }} miles of {{ search.zip }}
+      {% if search.availability %}· free {{ search.availability }}{% endif %}
+      {% if search.skills %}· {{ search.skills }}{% endif %}
+    </p>
+
+    {% if error %}
+      <div class="match empty">
+        <h2>No matches yet</h2>
+        <p>{{ error }}</p>
+      </div>
+    {% else %}
+      <h2>Your top {{ matches|length }} {{ "match" if matches|length == 1 else "matches" }}</h2>
+      {% if not used_ai %}
+        <p class="note">Ranked by matching skills (AI suggestions weren't available just now).</p>
+      {% endif %}
+
+      <ol class="matches">
+        {% for m in matches %}
+          <li class="match" style="--i: {{ loop.index0 }}">
+            <h3>{{ m.title }}</h3>
+            <p class="org">{{ m.org_name }}</p>
+            <p class="meta">{{ m.when }} · {{ m.distAway }} miles away · ZIP {{ m.zip_code }}</p>
+            <p class="why"><strong>Why it fits:</strong> {{ m.reason }}</p>
+            <p>{{ m.description }}</p>
+            {% if m.skills_needed %}
+              <ul class="tags">
+                {% for s in m.skills_needed %}<li>{{ s }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ol>
+    {% endif %}
+
+    <a class="back" href="{{ url_for('home') }}">&larr; New search</a>
+  </main>
+</body>
+</html>
